@@ -3,11 +3,14 @@ import App from "./App.tsx";
 import "./index.css";
 import { AuthContextProvider } from "./context/auth/AuthContext.tsx";
 import { OrdersContextProvider } from "./context/orders/OrdersContext.tsx";
+import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <AuthContextProvider>
-    <OrdersContextProvider>
-      <App />
-    </OrdersContextProvider>
-  </AuthContextProvider>
+  <BrowserRouter>
+    <AuthContextProvider>
+      <OrdersContextProvider>
+        <App />
+      </OrdersContextProvider>
+    </AuthContextProvider>
+  </BrowserRouter>
 );
