@@ -1,11 +1,9 @@
-import { AdminPanel } from "./pages/admin-panel-page";
-import { OrderPage } from "./pages/order-page";
+import { Root } from "./routes";
 
 function App() {
   return (
     <>
-      <OrderPage />
-      {/* <AdminPanel /> */}
+      <Root />
     </>
   );
 }
