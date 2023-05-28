@@ -5,7 +5,7 @@ import { PRIVATE_ROUTES, PUBLIC_ROUTES } from "./list";
 import { AdminPanelLayout } from "../pages/admin-panel-page";
 
 export const Root: FC = () => {
-  const [isUserLogined, setIsUserLogined] = useState<boolean>(false);
+  const [isUserLogined, setIsUserLogined] = useState<boolean>(true);
 
   return (
     <>

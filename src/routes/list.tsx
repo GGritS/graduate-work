@@ -1,4 +1,7 @@
 import { AdminPanelLayout } from "../pages/admin-panel-page";
+import { DataGrid } from "../pages/admin-panel-page/components/data-grid";
+import { Reports } from "../pages/admin-panel-page/components/repots";
+import { Home } from "../pages/admin-panel-page/components/home";
 import { OrderPage } from "../pages/order-page";
 import { Route } from "./types";
 
@@ -11,23 +14,30 @@ export const PUBLIC_ROUTES: Route[] = [
 
 export const PRIVATE_ROUTES: Route[] = [
   {
-    path: "/dataGrid",
-
-    component: <AdminPanelLayout>dataGrid</AdminPanelLayout>,
-  },
-  {
     path: "/table",
 
-    component: <AdminPanelLayout>table</AdminPanelLayout>,
+    component: (
+      <AdminPanelLayout>
+        <DataGrid />
+      </AdminPanelLayout>
+    ),
   },
   {
     path: "/",
 
-    component: <AdminPanelLayout>home</AdminPanelLayout>,
+    component: (
+      <AdminPanelLayout>
+        <Home />
+      </AdminPanelLayout>
+    ),
   },
   {
     path: "/reports",
 
-    component: <AdminPanelLayout>Reports</AdminPanelLayout>,
+    component: (
+      <AdminPanelLayout>
+        <Reports />
+      </AdminPanelLayout>
+    ),
   },
 ];

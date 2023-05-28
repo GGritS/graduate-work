@@ -1,34 +1,35 @@
-import { createTheme } from "@mui/material";
-import createBreakpoints from "@mui/system/createTheme/createBreakpoints";
+import { createTheme } from "@mui/material/styles";
 
-const breakpoints = createBreakpoints({});
+// const breakpoints = createBreakpoints({});
 
-//interface to add custom palette color- PaletteOptions
+declare module "@mui/material/styles" {
+  interface Palette {
+    customBackground: Palette["primary"];
+    customCardColor: Palette["primary"];
+  }
+  interface PaletteOptions {
+    customBackground?: PaletteOptions["primary"];
+    customCardColor?: PaletteOptions["primary"];
+  }
+}
 
 const theme = createTheme({
   palette: {
     primary: {
       main: "#070707",
     },
+    secondary: {
+      main: "#7380ec",
+    },
     customBackground: {
       main: "#f6f6f9",
       dark: "#363949",
     },
     customCardColor: {
-      main: "#fff",
+      main: "#ffffff",
       dark: "#202528",
     },
   },
-  // typography: {
-  //   h2: {
-  //
-  //     color: "#000000",
-  //     [breakpoints.up("md")]: {
-  //       fontSize: "64px",
-  //       lineHeight: "78px",
-  //     },
-  //   },
-  // },
 });
 
 export default theme;
