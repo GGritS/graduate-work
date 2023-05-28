@@ -5,8 +5,10 @@ import { PRIVATE_ROUTES, PUBLIC_ROUTES } from "./list";
 import { useAuthContext } from "../context/auth/AuthContext";
 
 export const Root: FC = () => {
+
   // const [isUserLogined, setIsUserLogined] = useState<boolean>(false);
   const { isUserLogined } = useAuthContext();
+
 
   return (
     <>
