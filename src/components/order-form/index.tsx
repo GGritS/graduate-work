@@ -1,79 +1,62 @@
-import React from 'react';
-import { TextField, Button } from '@mui/material';
-
+import React from "react";
+import { Box, TextField } from "@mui/material";
+import { CustomerData } from "../../types";
 
 interface OrderFormProps {
-  onSubmit: (data: FormData) => void;
+  changeCustomerData: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  customerData: CustomerData;
 }
 
-interface FormData {
-  firstName: string;
-  lastName: string;
-  phoneNumber: string;
-}
-
-const OrderForm: React.FC<OrderFormProps> = ({ onSubmit }) => {
-  const [formData, setFormData] = React.useState<FormData>({
-    firstName: '',
-    lastName: '',
-    phoneNumber: '',
-  });
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-    onSubmit(formData);
-  };
-
+const OrderForm: React.FC<OrderFormProps> = ({
+  changeCustomerData,
+  customerData,
+}) => {
   return (
-    <form style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }} onSubmit={handleSubmit}>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        width: "100%",
+      }}
+    >
       <TextField
-        label="Ім'я"
+        label="ПІБ"
         name="firstName"
-        value={formData.firstName}
-        onChange={handleChange}
+        value={customerData.firstName}
+        onChange={changeCustomerData}
         fullWidth
         margin="normal"
         required
         style={{
-          width: '100%',
+          width: "100%",
         }}
       />
       <TextField
-        label="Прізвище"
-        name="lastName"
-        value={formData.lastName}
-        onChange={handleChange}
+        label="Повна адресса, для відправки замовлення"
+        name="address"
+        value={customerData.address}
+        onChange={changeCustomerData}
         fullWidth
         margin="normal"
         required
         style={{
-          width: '100%',
+          width: "100%",
         }}
       />
       <TextField
         label="Номер телефону"
         name="phoneNumber"
-        value={formData.phoneNumber}
-        onChange={handleChange}
+        value={customerData.phoneNumber}
+        onChange={changeCustomerData}
         fullWidth
         margin="normal"
         required
         style={{
-          width: '100%',
+          width: "100%",
         }}
       />
-      {/* <Button variant="contained" color="primary" type="submit">
-        Submit
-      </Button> */}
-    </form>
+    </Box>
   );
 };
 

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useSwipeable } from "react-swipeable";
-import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
-import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import "./Slider.css";
 type Props = {
-  children: React.ReactNode
-  width?: number | string
-}
+  children: React.ReactNode;
+  width?: number | string;
+};
 
 export const SliderItem = ({ children, width }: Props) => {
   return (
@@ -46,7 +46,7 @@ const Slider = ({ children }: Props) => {
 
   const handlers = useSwipeable({
     onSwipedLeft: () => updateIndex(activeIndex + 1),
-    onSwipedRight: () => updateIndex(activeIndex - 1)
+    onSwipedRight: () => updateIndex(activeIndex - 1),
   });
 
   return (
@@ -62,13 +62,13 @@ const Slider = ({ children }: Props) => {
       >
         {React.Children.map(children, (child: any, index) => {
           if (child) {
-            return React.cloneElement(child, ({ width: "100%" }));
+            return React.cloneElement(child, { width: "100%" });
           }
         })}
       </div>
       <div className="indicators">
         <button
-          className='button'
+          className="button"
           onClick={() => {
             updateIndex(activeIndex - 1);
           }}
@@ -78,7 +78,9 @@ const Slider = ({ children }: Props) => {
         {React.Children.map(children, (child, index) => {
           return (
             <button
-              className={`${index === activeIndex ? "button active" : "button"}`}
+              className={`${
+                index === activeIndex ? "button active" : "button"
+              }`}
               onClick={() => {
                 updateIndex(index);
               }}
@@ -87,7 +89,8 @@ const Slider = ({ children }: Props) => {
             </button>
           );
         })}
-        <button className='button'
+        <button
+          className="button"
           onClick={() => {
             updateIndex(activeIndex + 1);
           }}

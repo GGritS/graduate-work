@@ -8,16 +8,75 @@ import zavod4 from "../../assets/zavod4.jpg";
 
 import "./Content.css";
 import OrderForm from "../order-form";
-import OrderSelect from "../order-select";
+import { CustomerData, ProductCardValue } from "../../types";
+import { useEffect, useState } from "react";
+import { SelectChangeEvent } from "@mui/material";
+import PRODUCTS from "../../productsData";
+import { OrderSelect } from "../order-select";
+import { calculateTotalPrice } from "../order-select/calculateTotalPrice";
+import { useOrdersContext } from "../../context/orders/OrdersContext";
+import { Timestamp } from "firebase/firestore";
 
 export const Content = () => {
-  const handleSubmit = (data: FormData) => {
-    console.log(data, "data");
+  const { handleAddOrder } = useOrdersContext();
+  const [customerData, setCustomerData] = useState<CustomerData>({
+    firstName: "",
+    address: "",
+    phoneNumber: "",
+  });
+  const [selectedProductTitle, setSelectedProductTitle] = useState<string[]>(
+    []
+  );
+  const [selectedProducts, setSelectedProducts] = useState<ProductCardValue[]>(
+    []
+  );
+
+  const handleChangeCustomerData = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const { name, value } = event.target;
+    setCustomerData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
+
+  const handleChangeSelectedProducts = (
+    event: SelectChangeEvent<typeof selectedProductTitle>
+  ) => {
+    const {
+      target: { value },
+    } = event;
+    setSelectedProductTitle(
+      typeof value === "string" ? value.split(",") : value
+    );
+  };
+
+  const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const preparedOrder = {
+      customerName: customerData.firstName,
+      customerAddress: customerData.address,
+      customerPhoneNumber: customerData.phoneNumber,
+      customerOrders: selectedProducts,
+      totalPrice: calculateTotalPrice(selectedProducts),
+    };
+    handleAddOrder(preparedOrder);
+    setSelectedProducts([]);
+    setSelectedProductTitle([]);
+  };
+
+  useEffect(() => {
+    const selected = PRODUCTS.filter((el) =>
+      selectedProductTitle.includes(el.name)
+    );
+    setSelectedProducts(selected);
+  }, [selectedProductTitle]);
 
   return (
     <>
-      <Container className="container" maxWidth="false">
+      <Container className="container" maxWidth={false}>
         <h1>Свіже та натуральне молоко, доставлене прямо до вас</h1>
         <div className="main-container">
           <p className="intro">
@@ -41,8 +100,18 @@ export const Content = () => {
           </Slider>
         </div>
         <div className="wrapper">
-          <OrderForm onSubmit={handleSubmit} />
-          <OrderSelect />
+          <OrderForm
+            changeCustomerData={handleChangeCustomerData}
+            customerData={customerData}
+          />
+          <OrderSelect
+            handleChangeSelectedProducts={handleChangeSelectedProducts}
+            handleFormSubmit={handleFormSubmit}
+            product={selectedProductTitle}
+            selectedProducts={selectedProducts}
+            setProduct={setSelectedProductTitle}
+            setSelectedProducts={setSelectedProducts}
+          />
         </div>
       </Container>
     </>
