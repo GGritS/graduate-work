@@ -1,5 +1,5 @@
 import { AdminPanelLayout } from "../pages/admin-panel-page";
-import { DataGrid } from "../pages/admin-panel-page/components/data-grid";
+import { DataGridOuter } from "../pages/admin-panel-page/components/data-grid";
 import { Reports } from "../pages/admin-panel-page/components/repots";
 import { Home } from "../pages/admin-panel-page/components/home";
 import { OrderPage } from "../pages/order-page";
@@ -23,7 +23,7 @@ export const PRIVATE_ROUTES: Route[] = [
 
     component: (
       <AdminPanelLayout>
-        <DataGrid />
+        <DataGridOuter />
       </AdminPanelLayout>
     ),
   },
