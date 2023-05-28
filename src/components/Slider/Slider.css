@@ -1,6 +1,6 @@
 .slider {
   overflow: hidden;
-
+  width: 100vh;
 }
 
 .inner {
@@ -32,12 +32,6 @@
 }
 
 
-
-@media (min-width: 768px) {
-  .slider {
-    width: 60vh;
-  }
-}
 
 
 
@@ -82,4 +76,10 @@
 .button:active {
   box-shadow: none;
   transform: translateY(0);
+}
+@media (max-width: 768px) {
+  .slider {
+    width: 100%;
+    max-width: 60vh ;
+  }
 }

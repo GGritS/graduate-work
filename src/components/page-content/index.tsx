@@ -27,25 +27,23 @@ export const Content = () => {
           </p>
           <Slider>
             <SliderItem>
-              {" "}
               <img className="sliderImage" src={zavod1} alt="" />
             </SliderItem>
             <SliderItem>
-              {" "}
               <img className="sliderImage" src={zavod2} alt="" />
             </SliderItem>
             <SliderItem>
-              {" "}
               <img className="sliderImage" src={zavod3} alt="" />
             </SliderItem>
             <SliderItem>
-              {" "}
               <img className="sliderImage" src={zavod4} alt="" />
             </SliderItem>
           </Slider>
         </div>
-        <OrderForm onSubmit={handleSubmit} />
-        <OrderSelect />
+        <div className="wrapper">
+          <OrderForm onSubmit={handleSubmit} />
+          <OrderSelect />
+        </div>
       </Container>
     </>
   );

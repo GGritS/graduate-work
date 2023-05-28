@@ -33,7 +33,7 @@ const OrderForm: React.FC<OrderFormProps> = ({ onSubmit }) => {
   };
 
   return (
-    <form style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} onSubmit={handleSubmit}>
+    <form style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }} onSubmit={handleSubmit}>
       <TextField
         label="Ім'я"
         name="firstName"
@@ -43,12 +43,11 @@ const OrderForm: React.FC<OrderFormProps> = ({ onSubmit }) => {
         margin="normal"
         required
         style={{
-          maxWidth: '70vh',
           width: '100%',
         }}
       />
       <TextField
-        label="Прізвисько"
+        label="Прізвище"
         name="lastName"
         value={formData.lastName}
         onChange={handleChange}
@@ -56,7 +55,6 @@ const OrderForm: React.FC<OrderFormProps> = ({ onSubmit }) => {
         margin="normal"
         required
         style={{
-          maxWidth: '70vh',
           width: '100%',
         }}
       />
@@ -69,7 +67,6 @@ const OrderForm: React.FC<OrderFormProps> = ({ onSubmit }) => {
         margin="normal"
         required
         style={{
-          maxWidth: '70vh',
           width: '100%',
         }}
       />
