@@ -6,6 +6,7 @@ h1{
   color: #0A314E;
 }
 .container{
+  width: 100%;
   padding: 10px
 }
 .slider{
@@ -31,4 +32,22 @@ p.intro {
   font-size: 16px;
   margin-bottom: 20px;
   color: #0A314E;
+}
+.wrapper{
+  padding-bottom:10px ;
+  background-color: #faf4f4d7;
+  width: 100%;
+display: flex;
+align-items: center;
+flex-direction: column;
+justify-content: center;
+margin: 0 auto;
+border-radius: 15px;
+padding: 15px;
+}
+@media (min-width: 1000px) {
+  .wrapper{
+    width: 100%;
+    max-width: 80vh;
+  }
 }
