@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import { FC, useState } from "react";
 import HomeIcon from "@mui/icons-material/Home";
 import BackupTableIcon from "@mui/icons-material/BackupTable";
 import AssessmentIcon from "@mui/icons-material/Assessment";
@@ -21,17 +21,22 @@ const NAV_BAR_ITEMS = [
     Icon: <AssessmentIcon fontSize="medium" />,
     path: "reports",
   },
+  {
+    title: "Вийти",
+    Icon: <AssessmentIcon fontSize="medium" />,
+    path: "reports",
+  },
 ];
 
 export const NavBar: FC = () => {
-  const [activeNavBarItem, setActiveNavBarItem] = useState<number>(0);
+  const [activeNavBarItem, setActiveNavBarItem] = useState<number>(2);
 
   return (
     <Box
       sx={{
-        pl: "5px",
+        pl: { xs: "0px", md: "10px" },
         pt: "5px",
-        width: "10%",
+        width: "100%",
         bgcolor: "blue",
         display: "flex",
         flexDirection: "column",
@@ -40,7 +45,8 @@ export const NavBar: FC = () => {
       {NAV_BAR_ITEMS.map((nav_item, index) => (
         <Box
           component={Link}
-          to={`/adminPanel/${nav_item.path}`}
+          key={index}
+          to={`/${nav_item.path}`}
           onClick={() => setActiveNavBarItem(index)}
           sx={{
             display: "flex",
@@ -50,7 +56,7 @@ export const NavBar: FC = () => {
             color: activeNavBarItem === index ? "black" : "red",
             ml: activeNavBarItem === index ? "10px" : "0px",
             ":hover": {
-              ml: "10px",
+              ml: "7px",
               transitionDuration: "0.5s",
             },
           }}

@@ -1,5 +1,4 @@
 import { Container } from "@mui/system";
-import { Grid } from "@mui/material";
 import Slider, { SliderItem } from "../Slider";
 
 import zavod1 from "../../assets/zavod1.jpg";
