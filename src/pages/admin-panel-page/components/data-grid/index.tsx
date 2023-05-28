@@ -1,5 +1,5 @@
 import React, { FC } from "react";
 
-export const ReactFC: FC = () => {
-  return <div></div>;
+export const DataGrid: FC = () => {
+  return <div>DataGrid Component</div>;
 };

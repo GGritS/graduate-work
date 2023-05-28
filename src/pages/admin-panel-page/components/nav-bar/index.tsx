@@ -3,7 +3,9 @@ import HomeIcon from "@mui/icons-material/Home";
 import BackupTableIcon from "@mui/icons-material/BackupTable";
 import AssessmentIcon from "@mui/icons-material/Assessment";
 import { Box } from "@mui/material";
-import { Link } from "react-router-dom";
+import { useStyles } from "./styles";
+import { NavBarItem } from "../common/navBarItem";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 const NAV_BAR_ITEMS = [
   {
@@ -23,46 +25,27 @@ const NAV_BAR_ITEMS = [
   },
   {
     title: "Вийти",
-    Icon: <AssessmentIcon fontSize="medium" />,
-    path: "reports",
+    Icon: <LogoutIcon fontSize="medium" />,
+    path: "",
   },
 ];
 
 export const NavBar: FC = () => {
   const [activeNavBarItem, setActiveNavBarItem] = useState<number>(2);
+  const style = useStyles();
 
   return (
-    <Box
-      sx={{
-        pl: { xs: "0px", md: "10px" },
-        pt: "5px",
-        width: "100%",
-        bgcolor: "blue",
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
+    <Box className={style.wrapper}>
       {NAV_BAR_ITEMS.map((nav_item, index) => (
-        <Box
-          component={Link}
-          key={index}
-          to={`/${nav_item.path}`}
-          onClick={() => setActiveNavBarItem(index)}
-          sx={{
-            display: "flex",
-            alignItems: "end",
-            gap: "5px",
-            cursor: "pointer",
-            color: activeNavBarItem === index ? "black" : "red",
-            ml: activeNavBarItem === index ? "10px" : "0px",
-            ":hover": {
-              ml: "7px",
-              transitionDuration: "0.5s",
-            },
-          }}
-        >
-          {nav_item.Icon}
-          <Box sx={{ fontSize: "20px" }}>{nav_item.title}</Box>
+        <Box className={style.navBarItemsWrapper} key={index}>
+          <NavBarItem
+            Icon={nav_item.Icon}
+            index={index}
+            path={nav_item.path}
+            title={nav_item.title}
+            setActiveNavBarItem={setActiveNavBarItem}
+            activeNavBarItemIndex={activeNavBarItem}
+          />
         </Box>
       ))}
     </Box>
