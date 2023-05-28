@@ -9,7 +9,7 @@ const NAV_BAR_ITEMS = [
   {
     title: "Головна",
     Icon: <HomeIcon fontSize="medium" />,
-    path: "home",
+    path: "",
   },
   {
     title: "Таблиця",

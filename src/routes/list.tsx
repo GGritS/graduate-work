@@ -12,6 +12,22 @@ export const PUBLIC_ROUTES: Route[] = [
 export const PRIVATE_ROUTES: Route[] = [
   {
     path: "/dataGrid",
-    component: <div>dataGrid</div>,
+
+    component: <AdminPanelLayout>dataGrid</AdminPanelLayout>,
+  },
+  {
+    path: "/table",
+
+    component: <AdminPanelLayout>table</AdminPanelLayout>,
+  },
+  {
+    path: "/",
+
+    component: <AdminPanelLayout>home</AdminPanelLayout>,
+  },
+  {
+    path: "/reports",
+
+    component: <AdminPanelLayout>Reports</AdminPanelLayout>,
   },
 ];

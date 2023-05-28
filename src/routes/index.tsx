@@ -10,14 +10,12 @@ export const Root: FC = () => {
   return (
     <>
       {isUserLogined ? (
-        <AdminPanelLayout>
-          <Routes>
-            {PRIVATE_ROUTES.map(({ path, component }) => (
-              <Route path={path} element={component} key={`Route-${path}`} />
-            ))}
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
-        </AdminPanelLayout>
+        <Routes>
+          {PRIVATE_ROUTES.map(({ path, component }) => (
+            <Route path={path} element={component} key={`Route-${path}`} />
+          ))}
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
       ) : (
         <Routes>
           {PUBLIC_ROUTES.map(({ path, component }) => (
