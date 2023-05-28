@@ -2,6 +2,7 @@ import { Box } from "@mui/material";
 import React, { FC } from "react";
 import { Link } from "react-router-dom";
 import { useStyles } from "./styles";
+import { useAuthContext } from "../../../../../context/auth/AuthContext";
 
 type NavBarItemProps = {
   index: number;
@@ -21,12 +22,17 @@ export const NavBarItem: FC<NavBarItemProps> = ({
   activeNavBarItemIndex,
 }) => {
   const style = useStyles({ isActive: index === activeNavBarItemIndex });
+  const { handleLogOut } = useAuthContext();
+
   return (
     <Box
       component={Link}
       key={index}
       to={`/${path}`}
-      onClick={() => setActiveNavBarItem(index)}
+      onClick={() => {
+        setActiveNavBarItem(index);
+        if (title === "Вийти") handleLogOut();
+      }}
       sx={{}}
       className={style.navBarItem}
     >
