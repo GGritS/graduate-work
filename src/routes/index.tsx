@@ -1,11 +1,12 @@
-import React, { FC, useState } from "react";
+import { FC, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import { PageNotFound } from "../pages/pageNotFound";
 import { PRIVATE_ROUTES, PUBLIC_ROUTES } from "./list";
-import { AdminPanelLayout } from "../pages/admin-panel-page";
+import { useAuthContext } from "../context/auth/AuthContext";
 
 export const Root: FC = () => {
-  const [isUserLogined, setIsUserLogined] = useState<boolean>(true);
+  // const [isUserLogined, setIsUserLogined] = useState<boolean>(false);
+  const { isUserLogined } = useAuthContext();
 
   return (
     <>
