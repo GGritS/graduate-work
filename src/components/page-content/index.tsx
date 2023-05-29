@@ -55,16 +55,30 @@ export const Content = () => {
   const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    const preparedSelectedProducts = selectedProducts.map((product) => {
+      return {
+        id: product.id,
+        name: product.name,
+        quantity: product.quantity,
+        price: product.price,
+      };
+    });
+
     const preparedOrder = {
       customerName: customerData.firstName,
       customerAddress: customerData.address,
       customerPhoneNumber: customerData.phoneNumber,
-      customerOrders: selectedProducts,
+      customerOrders: preparedSelectedProducts,
       totalPrice: calculateTotalPrice(selectedProducts),
     };
     handleAddOrder(preparedOrder);
     setSelectedProducts([]);
     setSelectedProductTitle([]);
+    setCustomerData({
+      firstName: "",
+      address: "",
+      phoneNumber: "",
+    });
   };
 
   useEffect(() => {

@@ -1,11 +1,17 @@
-import { createContext, FC, useContext, useState } from "react";
+import { createContext, FC, useContext, useEffect, useState } from "react";
 import {
   Order,
   OrderContextProviderProps,
   OrdersContextProviderTypes,
 } from ".";
 import { db } from "../../firebase";
-import { doc, setDoc, Timestamp } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  onSnapshot,
+  setDoc,
+  Timestamp,
+} from "firebase/firestore";
 
 const OrdersContext = createContext<OrdersContextProviderTypes>(
   {} as OrdersContextProviderTypes
@@ -15,6 +21,20 @@ export const OrdersContextProvider: FC<OrderContextProviderProps> = ({
   children,
 }) => {
   const [orders, setOrders] = useState<Order[]>([]);
+
+  console.log("orders", orders);
+
+  useEffect(() => {
+    const unsub = onSnapshot(collection(db, "orders"), (doc) => {
+      const orders = doc.docs.map((data: any) => data.data()) as Order[];
+
+      setOrders(orders);
+    });
+
+    return () => {
+      unsub();
+    };
+  }, []);
 
   const fetchOrders = async () => {
     const res = await [];
@@ -36,10 +56,6 @@ export const OrdersContextProvider: FC<OrderContextProviderProps> = ({
 
   const handleAddOrder = async (order: Order) => {
     const currentTime = await Timestamp.now();
-    console.log("order", {
-      ...order,
-      orderTime: currentTime,
-    });
 
     try {
       await setDoc(doc(db, "orders", generateRandomId()), {

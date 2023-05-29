@@ -3,6 +3,8 @@ export type ProductCardValue = {
   name: string;
   quantity: number;
   price: number;
+  description: string;
+  photo: string;
 };
 
 export type CustomerData = {
