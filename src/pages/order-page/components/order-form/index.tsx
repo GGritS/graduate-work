@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, TextField } from "@mui/material";
-import { CustomerData } from "../../types";
+import { CustomerData } from "../../../../types";
 
 interface OrderFormProps {
   changeCustomerData: (event: React.ChangeEvent<HTMLInputElement>) => void;

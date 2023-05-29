@@ -1,21 +1,20 @@
 import { Container } from "@mui/system";
 import Slider, { SliderItem } from "../Slider";
 
-import zavod1 from "../../assets/zavod1.jpg";
-import zavod2 from "../../assets/zavod2.jpg";
-import zavod3 from "../../assets/zavod3.jpg";
-import zavod4 from "../../assets/zavod4.jpg";
+import zavod1 from "../../../../assets/zavod1.jpg";
+import zavod2 from "../../../../assets/zavod2.jpg";
+import zavod3 from "../../../../assets/zavod3.jpg";
+import zavod4 from "../../../../assets/zavod4.jpg";
 
 import "./Content.css";
 import OrderForm from "../order-form";
-import { CustomerData, ProductCardValue } from "../../types";
-import { useEffect, useState } from "react";
+import { CustomerData, ProductCardValue } from "../../../../types";
+import { useState } from "react";
 import { SelectChangeEvent } from "@mui/material";
-import PRODUCTS from "../../productsData";
+import PRODUCTS from "../../../../productsData";
 import { OrderSelect } from "../order-select";
 import { calculateTotalPrice } from "../order-select/calculateTotalPrice";
-import { useOrdersContext } from "../../context/orders/OrdersContext";
-import { Timestamp } from "firebase/firestore";
+import { useOrdersContext } from "../../../../context/orders/OrdersContext";
 
 export const Content = () => {
   const { handleAddOrder } = useOrdersContext();
@@ -81,12 +80,19 @@ export const Content = () => {
     });
   };
 
-  useEffect(() => {
-    const selected = PRODUCTS.filter((el) =>
-      selectedProductTitle.includes(el.name)
-    );
-    setSelectedProducts(selected);
-  }, [selectedProductTitle]);
+  const handleAddSelectedProduct = (id: number) => {
+    if (selectedProductTitle.includes(PRODUCTS[id].name)) {
+      setSelectedProductTitle(
+        selectedProductTitle.filter((title) => title !== PRODUCTS[id].name)
+      );
+      setSelectedProducts(
+        selectedProducts.filter((product) => product.id !== PRODUCTS[id].id)
+      );
+    } else {
+      setSelectedProductTitle((prev) => [...prev, PRODUCTS[id].name]);
+      setSelectedProducts((prev) => [PRODUCTS[id], ...prev]);
+    }
+  };
 
   return (
     <>
@@ -125,6 +131,7 @@ export const Content = () => {
             selectedProducts={selectedProducts}
             setProduct={setSelectedProductTitle}
             setSelectedProducts={setSelectedProducts}
+            handleAddSelectedProduct={handleAddSelectedProduct}
           />
         </div>
       </Container>

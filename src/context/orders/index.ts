@@ -4,7 +4,7 @@ import { Timestamp } from "firebase/firestore";
 
 export type OrdersContextProviderTypes = {
   orders: Order[];
-  handleAddOrder: (order: Order) => void;
+  handleAddOrder: (order: Omit<Order, "orderTime">) => void;
 };
 
 export type OrderContextProviderProps = {

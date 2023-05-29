@@ -6,9 +6,9 @@ import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import Chip from "@mui/material/Chip";
 import { Button } from "@mui/material";
-import PRODUCTS from "../../productsData";
+import PRODUCTS from "../../../../productsData";
 import { FC } from "react";
-import { ProductCardValue } from "../../types";
+import { ProductCardValue } from "../../../../types";
 import { calculateTotalPrice } from "./calculateTotalPrice";
 import { ProductCard } from "../product-card";
 
@@ -39,6 +39,7 @@ type OrderSelectProps = {
   selectedProducts: ProductCardValue[];
   setProduct: React.Dispatch<React.SetStateAction<string[]>>;
   setSelectedProducts: React.Dispatch<React.SetStateAction<ProductCardValue[]>>;
+  handleAddSelectedProduct: (id: number) => void;
 };
 
 export const OrderSelect: FC<OrderSelectProps> = ({
@@ -48,6 +49,7 @@ export const OrderSelect: FC<OrderSelectProps> = ({
   selectedProducts,
   setProduct,
   setSelectedProducts,
+  handleAddSelectedProduct,
 }) => {
   return (
     <>
@@ -92,6 +94,7 @@ export const OrderSelect: FC<OrderSelectProps> = ({
               <MenuItem
                 key={el.name}
                 value={el.name}
+                onClick={() => handleAddSelectedProduct(el.id - 1)}
                 // style={getStyles(el.name, product, theme)}
               >
                 {el.name}
