@@ -26,7 +26,7 @@ export const OrdersContextProvider: FC<OrderContextProviderProps> = ({
     const unsub = onSnapshot(collection(db, "orders"), (doc) => {
       const orders = doc.docs.map((data: any) => data.data()) as Order[];
       const orderedProductsByDate = orders.sort(
-        (a, b) => a?.orderTime?.seconds - b?.orderTime?.nanoseconds
+        (a, b) => b?.orderTime?.seconds - a?.orderTime?.seconds
       );
       setOrders(orderedProductsByDate);
     });
