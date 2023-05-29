@@ -31,6 +31,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   childrenWrapper: {
     flex: 1,
     padding: "10px",
+    overflowX: "auto",
   },
 }));
 

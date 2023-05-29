@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import HomeIcon from "@mui/icons-material/Home";
 import BackupTableIcon from "@mui/icons-material/BackupTable";
 import AssessmentIcon from "@mui/icons-material/Assessment";
@@ -6,6 +6,7 @@ import { Box } from "@mui/material";
 import { useStyles } from "./styles";
 import { NavBarItem } from "../common/navBarItem";
 import LogoutIcon from "@mui/icons-material/Logout";
+import { useNavigate } from "react-router-dom";
 
 const NAV_BAR_ITEMS = [
   {
@@ -31,8 +32,12 @@ const NAV_BAR_ITEMS = [
 ];
 
 export const NavBar: FC = () => {
-  const [activeNavBarItem, setActiveNavBarItem] = useState<number>(2);
+  const [activeNavBarItem, setActiveNavBarItem] = useState<number>(0);
   const style = useStyles();
+  const navigate = useNavigate();
+  useEffect(() => {
+    navigate("/");
+  }, []);
 
   return (
     <Box className={style.wrapper}>
