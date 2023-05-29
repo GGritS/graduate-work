@@ -1,5 +1,10 @@
 import { Button, Modal, Paper } from "@mui/material";
-import { DataGrid, GridColDef, GridRowsProp } from "@mui/x-data-grid";
+import {
+  DataGrid,
+  GridColDef,
+  GridRowsProp,
+  GridToolbar,
+} from "@mui/x-data-grid";
 import { FC, useMemo, useState } from "react";
 import { useOrdersContext } from "../../../../context/orders/OrdersContext";
 import { CustomerOrder, Order } from "../../../../context/orders";
@@ -155,7 +160,15 @@ export const DataGridOuter: FC = () => {
   return (
     <>
       {orders ? (
-        <DataGrid<Row> columns={columns} rows={rows} />
+        <DataGrid<Row>
+          columns={columns}
+          rows={rows}
+          components={{
+            Toolbar: () => {
+              return <GridToolbar />;
+            },
+          }}
+        />
       ) : (
         <div>loading</div>
       )}
