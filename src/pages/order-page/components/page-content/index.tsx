@@ -10,7 +10,7 @@ import "./Content.css";
 import OrderForm from "../order-form";
 import { CustomerData, ProductCardValue } from "../../../../types";
 import { useState } from "react";
-import { SelectChangeEvent } from "@mui/material";
+import { Alert, SelectChangeEvent } from "@mui/material";
 import PRODUCTS from "../../../../productsData";
 import { OrderSelect } from "../order-select";
 import { calculateTotalPrice } from "../order-select/calculateTotalPrice";
@@ -23,6 +23,7 @@ export const Content = () => {
     address: "",
     phoneNumber: "",
   });
+  const [isHintShowed, setIsHintShowed] = useState<boolean>(false);
   const [selectedProductTitle, setSelectedProductTitle] = useState<string[]>(
     []
   );
@@ -53,6 +54,10 @@ export const Content = () => {
 
   const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setIsHintShowed(true);
+    setTimeout(() => {
+      setIsHintShowed(false);
+    }, 2 * 1000);
 
     const preparedSelectedProducts = selectedProducts.map((product) => {
       return {
@@ -134,6 +139,15 @@ export const Content = () => {
             handleAddSelectedProduct={handleAddSelectedProduct}
           />
         </div>
+        {isHintShowed && (
+          <Alert
+            severity="success"
+            variant="filled"
+            sx={{ width: "fit-content" }}
+          >
+            This is a success alert — check it out!
+          </Alert>
+        )}
       </Container>
     </>
   );

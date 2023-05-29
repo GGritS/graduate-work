@@ -5,6 +5,7 @@ export type AuthContextProviderTypes = {
   user: User;
   isUserLogined: boolean;
   loginError: string | undefined;
+  isDataFetched: boolean;
   handleLogOut: () => void;
   handleLogin: (userLoginData: UserLoginFields) => void;
 };

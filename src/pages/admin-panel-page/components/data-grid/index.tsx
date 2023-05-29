@@ -42,12 +42,12 @@ const OpenModalButton: FC<UserOrder> = ({ data }) => {
         {
           field: "name",
           headerName: "Назва продукту",
-          width: 250,
+          width: 200,
         },
         {
           field: "quantity",
           headerName: "Кількість (шт.)",
-          width: 100,
+          width: 200,
         },
         {
           field: "price",
@@ -56,8 +56,8 @@ const OpenModalButton: FC<UserOrder> = ({ data }) => {
         },
         {
           field: "totalPrice",
-          headerName: "Ціна за весь товар ",
-          width: 100,
+          headerName: "Ціна за всю кілкість товару ",
+          width: 200,
         },
       ],
       rows: data.map((customerOrder, index) => {
@@ -92,6 +92,8 @@ const OpenModalButton: FC<UserOrder> = ({ data }) => {
 
 export const DataGridOuter: FC = () => {
   const { orders } = useOrdersContext();
+  console.log(orders);
+
   const convertTotDate = (seconds: number | undefined) => {
     if (!seconds) return "Error date";
     return new Date(seconds * 1000).toLocaleDateString();
@@ -112,6 +114,7 @@ export const DataGridOuter: FC = () => {
           field: "customerName",
           headerName: "Ім'я замовника",
           flex: 1,
+          minWidth: 250,
         },
         {
           field: "customerAddress",

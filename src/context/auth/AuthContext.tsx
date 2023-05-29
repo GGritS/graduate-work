@@ -31,6 +31,7 @@ export const AuthContextProvider: FC<AuthContextProviderProps> = ({
   const navigate = useNavigate();
   const [user, setUser] = useState<User>({} as User);
   const [isUserLogined, setIsUserLogined] = useState<boolean>(false);
+  const [isDataFetched, setIsDataFetching] = useState<boolean>(false);
 
   const [loginError, setError] = useState<any>();
 
@@ -56,12 +57,15 @@ export const AuthContextProvider: FC<AuthContextProviderProps> = ({
     signOut(auth);
   };
   useEffect(() => {
+    setIsDataFetching(false);
     const unlisten = onAuthStateChanged(auth, (authUser) => {
       if (authUser) {
         setUser(authUser);
         setIsUserLogined(true);
+        setIsDataFetching(true);
       } else {
         setIsUserLogined(false);
+        setIsDataFetching(true);
         setUser({} as User);
       }
     });
@@ -75,6 +79,7 @@ export const AuthContextProvider: FC<AuthContextProviderProps> = ({
     isUserLogined,
     loginError,
     handleLogOut,
+    isDataFetched,
     handleLogin,
   };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
