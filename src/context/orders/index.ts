@@ -17,7 +17,7 @@ export type Order = {
   customerPhoneNumber: string;
   customerOrders: CustomerOrder[];
   totalPrice: number;
-  orderTime?: Timestamp;
+  orderTime: Timestamp;
 };
 
 export type CustomerOrder = Omit<ProductCardValue, "description" | "photo">;

@@ -22,13 +22,13 @@ export const OrdersContextProvider: FC<OrderContextProviderProps> = ({
 }) => {
   const [orders, setOrders] = useState<Order[]>([]);
 
-  console.log("orders", orders);
-
   useEffect(() => {
     const unsub = onSnapshot(collection(db, "orders"), (doc) => {
       const orders = doc.docs.map((data: any) => data.data()) as Order[];
-
-      setOrders(orders);
+      const orderedProductsByDate = orders.sort(
+        (a, b) => a?.orderTime?.seconds - b?.orderTime?.nanoseconds
+      );
+      setOrders(orderedProductsByDate);
     });
 
     return () => {
@@ -36,10 +36,6 @@ export const OrdersContextProvider: FC<OrderContextProviderProps> = ({
     };
   }, []);
 
-  const fetchOrders = async () => {
-    const res = await [];
-    setOrders(res);
-  };
   function generateRandomId() {
     const characters =
       "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";

@@ -14,7 +14,7 @@ export const Login: FC = () => {
 
   const formik = useFormik({
     initialValues: {
-      password: "dasdsad",
+      password: "123456",
       email: "admin@gmail.com",
     },
     onSubmit: (values) => {
