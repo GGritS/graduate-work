@@ -1,8 +1,8 @@
 import { Box, Button, Paper, TextField } from "@mui/material";
 import React, { ChangeEvent, FC } from "react";
 import { GridDeleteIcon } from "@mui/x-data-grid";
-import { ProductCardValue } from "../../types";
-import { calculateProductTotalPrice } from "../../helpers/calculateProductTotalPrice";
+import { ProductCardValue } from "../../../../types";
+import { calculateProductTotalPrice } from "../../../../helpers/calculateProductTotalPrice";
 
 type ProductCardProps = {
   product: ProductCardValue;
@@ -16,6 +16,7 @@ export const ProductCard: FC<ProductCardProps> = ({
   setProduct,
 }) => {
   const { description, name, id, quantity, price, photo } = product;
+
   const handleQuantityChange = (
     event: React.ChangeEvent<HTMLInputElement>,
     productId: number
@@ -107,7 +108,11 @@ export const ProductCard: FC<ProductCardProps> = ({
         }}
       >
         <TextField
-          value={quantity || ""}
+          value={quantity}
+          inputProps={{
+            min: 20,
+            max: 10_000,
+          }}
           onChange={(event: ChangeEvent<HTMLInputElement>) =>
             handleQuantityChange(event, id)
           }

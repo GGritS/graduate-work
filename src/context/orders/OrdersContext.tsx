@@ -50,7 +50,7 @@ export const OrdersContextProvider: FC<OrderContextProviderProps> = ({
     return randomId;
   }
 
-  const handleAddOrder = async (order: Order) => {
+  const handleAddOrder = async (order: Omit<Order, "orderTime">) => {
     const currentTime = await Timestamp.now();
 
     try {
