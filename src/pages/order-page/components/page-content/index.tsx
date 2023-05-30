@@ -11,12 +11,14 @@ import OrderForm from "../order-form";
 import { CustomerData, ProductCardValue } from "../../../../types";
 import { useState } from "react";
 import { Alert, SelectChangeEvent } from "@mui/material";
-import PRODUCTS from "../../../../productsData";
+// import PRODUCTS from "../../../../productsData";
 import { OrderSelect } from "../order-select";
 import { calculateTotalPrice } from "../order-select/calculateTotalPrice";
 import { useOrdersContext } from "../../../../context/orders/OrdersContext";
+import { useProductsContext } from "../../../../context/products/ProductsContext";
 
 export const Content = () => {
+  const { products } = useProductsContext();
   const { handleAddOrder } = useOrdersContext();
   const [customerData, setCustomerData] = useState<CustomerData>({
     firstName: "",
@@ -84,18 +86,26 @@ export const Content = () => {
       phoneNumber: "",
     });
   };
+  for (let i = 0; i <= selectedProducts.length; i++) {
+    console.log(" seleted id", selectedProducts[0]?.id);
+  }
 
   const handleAddSelectedProduct = (id: number) => {
-    if (selectedProductTitle.includes(PRODUCTS[id].name)) {
+    console.log(" id -", id);
+
+    if (selectedProductTitle.includes(products[id].name)) {
       setSelectedProductTitle(
-        selectedProductTitle.filter((title) => title !== PRODUCTS[id].name)
+        selectedProductTitle.filter((title) => title !== products[id].name)
       );
       setSelectedProducts(
-        selectedProducts.filter((product) => product.id !== PRODUCTS[id].id)
+        selectedProducts.filter((product) => product.id !== products[id].id)
       );
     } else {
-      setSelectedProductTitle((prev) => [...prev, PRODUCTS[id].name]);
-      setSelectedProducts((prev) => [PRODUCTS[id], ...prev]);
+      setSelectedProductTitle((prev) => [...prev, products[id].name]);
+      setSelectedProducts((prev) => [
+        { ...products[id], quantity: 0 },
+        ...prev,
+      ]);
     }
   };
 
@@ -130,9 +140,10 @@ export const Content = () => {
             customerData={customerData}
           />
           <OrderSelect
+            products={products}
             handleChangeSelectedProducts={handleChangeSelectedProducts}
             handleFormSubmit={handleFormSubmit}
-            product={selectedProductTitle}
+            productTitles={selectedProductTitle}
             selectedProducts={selectedProducts}
             setProduct={setSelectedProductTitle}
             setSelectedProducts={setSelectedProducts}

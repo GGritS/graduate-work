@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       display: "none",
     },
     [theme.breakpoints.down("lg")]: {
-      width: "15%",
+      width: "17%",
     },
     [theme.breakpoints.up("lg")]: {
       width: "13%",

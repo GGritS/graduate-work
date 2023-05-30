@@ -46,21 +46,26 @@ export const OrdersContextProvider: FC<OrderContextProviderProps> = ({
     }
   };
 
-  useEffect(() => {
+  const fetchOrders = () => {
     const unsub = onSnapshot(collection(db, "orders"), (doc) => {
       const orders = doc.docs.map((data: any) => data.data()) as Order[];
       const orderedProductsByDate = orders.sort(
         (a, b) => b?.orderTime?.seconds - a?.orderTime?.seconds
       );
       setOrders(orderedProductsByDate);
+      return () => {
+        unsub();
+      };
     });
-
-    return () => {
-      unsub();
-    };
+  };
+  useEffect(() => {
+    fetchOrders();
   }, []);
 
-  const value: OrdersContextProviderTypes = { orders, handleAddOrder };
+  const value: OrdersContextProviderTypes = {
+    orders,
+    handleAddOrder,
+  };
   return (
     <OrdersContext.Provider value={value}>{children}</OrdersContext.Provider>
   );

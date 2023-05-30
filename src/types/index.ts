@@ -1,10 +1,8 @@
-export type ProductCardValue = {
-  id: number;
-  name: string;
+import { Product } from "../context/products";
+
+export type ProductCardValue = Omit<Product, "fid"> & {
   quantity: number;
-  price: number;
   description: string;
-  photo: string;
 };
 
 export type CustomerData = {

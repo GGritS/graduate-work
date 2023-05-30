@@ -6,11 +6,12 @@ import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import Chip from "@mui/material/Chip";
 import { Button } from "@mui/material";
-import PRODUCTS from "../../../../productsData";
+// import PRODUCTS from "../../../../productsData";
 import { FC } from "react";
 import { ProductCardValue } from "../../../../types";
 import { calculateTotalPrice } from "./calculateTotalPrice";
 import { ProductCard } from "../product-card";
+import { Product } from "../../../../context/products";
 
 // const ITEM_HEIGHT = 48;
 // const ITEM_PADDING_TOP = 8;
@@ -35,21 +36,23 @@ import { ProductCard } from "../product-card";
 type OrderSelectProps = {
   handleChangeSelectedProducts: (event: SelectChangeEvent<string[]>) => void;
   handleFormSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
-  product: string[];
+  productTitles: string[];
   selectedProducts: ProductCardValue[];
   setProduct: React.Dispatch<React.SetStateAction<string[]>>;
   setSelectedProducts: React.Dispatch<React.SetStateAction<ProductCardValue[]>>;
   handleAddSelectedProduct: (id: number) => void;
+  products: Product[];
 };
 
 export const OrderSelect: FC<OrderSelectProps> = ({
   handleChangeSelectedProducts,
   handleFormSubmit,
-  product,
+  productTitles,
   selectedProducts,
   setProduct,
   setSelectedProducts,
   handleAddSelectedProduct,
+  products,
 }) => {
   return (
     <>
@@ -67,7 +70,7 @@ export const OrderSelect: FC<OrderSelectProps> = ({
             id="demo-multiple-chip"
             multiple
             fullWidth
-            value={product}
+            value={productTitles}
             onChange={handleChangeSelectedProducts}
             input={
               <OutlinedInput
@@ -90,14 +93,14 @@ export const OrderSelect: FC<OrderSelectProps> = ({
             )}
             // MenuProps={MenuProps}
           >
-            {PRODUCTS.map((el) => (
+            {products.map((product) => (
               <MenuItem
-                key={el.name}
-                value={el.name}
-                onClick={() => handleAddSelectedProduct(el.id - 1)}
+                key={product.id}
+                value={product.name}
+                onClick={() => handleAddSelectedProduct(product.id)}
                 // style={getStyles(el.name, product, theme)}
               >
-                {el.name}
+                {product.name}
               </MenuItem>
             ))}
           </Select>
@@ -110,7 +113,7 @@ export const OrderSelect: FC<OrderSelectProps> = ({
             setSelectedProducts={setSelectedProducts}
           />
         ))}
-        {product.length > 0 && (
+        {productTitles.length > 0 && (
           <>
             <h4>
               Загальна сума замовлення: {calculateTotalPrice(selectedProducts)}

@@ -20,4 +20,4 @@ export type Order = {
   orderTime: Timestamp;
 };
 
-export type CustomerOrder = Omit<ProductCardValue, "description" | "photo">;
+export type CustomerOrder = Omit<ProductCardValue, "description" | "image">;
