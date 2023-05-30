@@ -19,6 +19,7 @@ export const Login: FC = () => {
     },
     onSubmit: (values) => {
       handleLogin(values);
+      formik.setValues({ password: "", email: "" });
     },
     validationSchema,
   });

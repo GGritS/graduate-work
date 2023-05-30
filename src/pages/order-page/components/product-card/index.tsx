@@ -15,7 +15,7 @@ export const ProductCard: FC<ProductCardProps> = ({
   setSelectedProducts,
   setProduct,
 }) => {
-  const { description, name, id, quantity, price, photo } = product;
+  const { description, name, id, quantity, price, image } = product;
 
   const handleQuantityChange = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -95,7 +95,7 @@ export const ProductCard: FC<ProductCardProps> = ({
           style={{
             marginBottom: "10px",
           }}
-          src={photo}
+          src={image}
           alt="product photo"
         />
       </div>

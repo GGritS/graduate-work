@@ -1,17 +1,24 @@
 import { FC, useEffect, useState } from "react";
-import HomeIcon from "@mui/icons-material/Home";
+// import HomeIcon from "@mui/icons-material/Home";
 import BackupTableIcon from "@mui/icons-material/BackupTable";
 import AssessmentIcon from "@mui/icons-material/Assessment";
+import AddBusinessIcon from "@mui/icons-material/AddBusiness";
 import { Box } from "@mui/material";
 import { useStyles } from "./styles";
 import { NavBarItem } from "../common/navBarItem";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router-dom";
+import InventoryIcon from "@mui/icons-material/Inventory";
 
 const NAV_BAR_ITEMS = [
+  // {
+  //   title: "Головна",
+  //   Icon: <HomeIcon fontSize="medium" />,
+  //   path: "",
+  // },
   {
-    title: "Головна",
-    Icon: <HomeIcon fontSize="medium" />,
+    title: "Продукти",
+    Icon: <InventoryIcon fontSize="medium" />,
     path: "",
   },
   {
@@ -23,6 +30,12 @@ const NAV_BAR_ITEMS = [
     title: "Звітність",
     Icon: <AssessmentIcon fontSize="medium" />,
     path: "reports",
+  },
+
+  {
+    title: "Додати продукт",
+    Icon: <AddBusinessIcon fontSize="medium" />,
+    path: "addProduct",
   },
   {
     title: "Вийти",
