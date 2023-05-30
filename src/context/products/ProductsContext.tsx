@@ -25,7 +25,7 @@ export const ProductsContextProvider: FC<ProductsContextProviderProps> = ({
   const [products, setProducts] = useState<Product[]>([]);
 
   const handleAddProduct = async (product: Omit<Product, "id" | "fid">) => {
-    const id = products.length;
+    const id = products.length + 1;
 
     try {
       await setDoc(doc(db, "products", generateRandomId()), {
