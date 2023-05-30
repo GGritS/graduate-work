@@ -12,6 +12,8 @@ import {
   setDoc,
   Timestamp,
 } from "firebase/firestore";
+import { generateRandomId } from "./helperFunctions/generateRandomId";
+import { showTodayOrders } from "./helperFunctions/showTodayOrders";
 
 const OrdersContext = createContext<OrdersContextProviderTypes>(
   {} as OrdersContextProviderTypes
@@ -21,6 +23,28 @@ export const OrdersContextProvider: FC<OrderContextProviderProps> = ({
   children,
 }) => {
   const [orders, setOrders] = useState<Order[]>([]);
+  const [todayOrders, setTodayOrders] = useState<Order[]>([]);
+
+  useEffect(() => {
+    const fetchTodayOrders = async () => {
+      const updatedOrders = await showTodayOrders(orders);
+      setTodayOrders(updatedOrders);
+    };
+    fetchTodayOrders();
+  }, [orders]);
+
+  const handleAddOrder = async (order: Omit<Order, "orderTime">) => {
+    const currentTime = await Timestamp.now();
+
+    try {
+      await setDoc(doc(db, "orders", generateRandomId()), {
+        ...order,
+        orderTime: currentTime,
+      });
+    } catch (error) {
+      console.error("Error: ", error);
+    }
+  };
 
   useEffect(() => {
     const unsub = onSnapshot(collection(db, "orders"), (doc) => {
@@ -35,33 +59,6 @@ export const OrdersContextProvider: FC<OrderContextProviderProps> = ({
       unsub();
     };
   }, []);
-
-  function generateRandomId() {
-    const characters =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    const length = 8;
-    let randomId = "";
-
-    for (let i = 0; i < length; i++) {
-      const randomIndex = Math.floor(Math.random() * characters.length);
-      randomId += characters.charAt(randomIndex);
-    }
-
-    return randomId;
-  }
-
-  const handleAddOrder = async (order: Omit<Order, "orderTime">) => {
-    const currentTime = await Timestamp.now();
-
-    try {
-      await setDoc(doc(db, "orders", generateRandomId()), {
-        ...order,
-        orderTime: currentTime,
-      });
-    } catch (error) {
-      console.error("Error: ", error);
-    }
-  };
 
   const value: OrdersContextProviderTypes = { orders, handleAddOrder };
   return (

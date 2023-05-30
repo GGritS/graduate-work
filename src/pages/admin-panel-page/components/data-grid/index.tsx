@@ -92,7 +92,6 @@ const OpenModalButton: FC<UserOrder> = ({ data }) => {
 
 export const DataGridOuter: FC = () => {
   const { orders } = useOrdersContext();
-  console.log(orders);
 
   const convertTotDate = (seconds: number | undefined) => {
     if (!seconds) return "Error date";
