@@ -49,6 +49,7 @@ export const Content = () => {
     const {
       target: { value },
     } = event;
+
     setSelectedProductTitle(
       typeof value === "string" ? value.split(",") : value
     );
@@ -86,13 +87,8 @@ export const Content = () => {
       phoneNumber: "",
     });
   };
-  for (let i = 0; i <= selectedProducts.length; i++) {
-    console.log(" seleted id", selectedProducts[0]?.id);
-  }
 
   const handleAddSelectedProduct = (id: number) => {
-    console.log(" id -", id);
-
     if (selectedProductTitle.includes(products[id].name)) {
       setSelectedProductTitle(
         selectedProductTitle.filter((title) => title !== products[id].name)
@@ -103,7 +99,7 @@ export const Content = () => {
     } else {
       setSelectedProductTitle((prev) => [...prev, products[id].name]);
       setSelectedProducts((prev) => [
-        { ...products[id], quantity: 0 },
+        { ...products[id], quantity: 30 },
         ...prev,
       ]);
     }
@@ -141,6 +137,7 @@ export const Content = () => {
           />
           <OrderSelect
             products={products}
+            customerData={customerData}
             handleChangeSelectedProducts={handleChangeSelectedProducts}
             handleFormSubmit={handleFormSubmit}
             productTitles={selectedProductTitle}
