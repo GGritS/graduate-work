@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import React, { FC, useEffect, useRef, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import {
   Bar,
   BarChart,
@@ -21,6 +21,7 @@ type MyBarChartProps = {
 export const MyBarChart: FC<MyBarChartProps> = ({ product }) => {
   const { name, id } = product;
   const divRef = useRef<HTMLDivElement>(null);
+  // eslint-disable-next-line
   const [data, setData] = useState<any>();
   const { orders } = useOrdersContext();
   const { preparedDate } = useProductsContext();
@@ -33,6 +34,7 @@ export const MyBarChart: FC<MyBarChartProps> = ({ product }) => {
       id
     );
     setData(newData);
+    // eslint-disable-next-line
   }, [product, preparedDate, orders]);
   const [currentWidth, setCurrentWidth] = useState<number>(200);
 
@@ -42,7 +44,7 @@ export const MyBarChart: FC<MyBarChartProps> = ({ product }) => {
         ? currentWidth
         : divRef.current.getBoundingClientRect().width;
     setCurrentWidth(getWidth);
-  }, []);
+  }, [currentWidth]);
   return (
     <Box>
       <Typography sx={{ display: "flex" }}>

@@ -50,7 +50,7 @@ export const NavBar: FC = () => {
   const navigate = useNavigate();
   useEffect(() => {
     navigate("/");
-  }, []);
+  }, [navigate]);
 
   return (
     <Box className={style.wrapper}>

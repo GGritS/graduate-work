@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import { Order } from "../orders";
 
 export type ProductsContextProviderTypes = {
   products: Product[];

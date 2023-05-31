@@ -1,5 +1,5 @@
 import { FC, ReactNode, useState } from "react";
-import { useStyles } from "./style";
+// import { useStyles } from "./style";
 import { Box, IconButton, TextField, Typography } from "@mui/material";
 import { ReportCircle } from "../report-circle";
 import EditIcon from "@mui/icons-material/Edit";
@@ -12,7 +12,7 @@ type ReportCardProps = {
 };
 
 export const ReportCard: FC<ReportCardProps> = ({ value, title, children }) => {
-  const style = useStyles();
+  // const style = useStyles();
   const [requiredAmount, setRequiredAmount] = useState<number>(value);
   const [inputValue, setInputValue] = useState<number>(requiredAmount);
   const [isChanging, setIsChanging] = useState<boolean>(false);
