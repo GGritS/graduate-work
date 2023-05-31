@@ -16,8 +16,6 @@ import {
 } from "firebase/firestore";
 import { db } from "../../firebase";
 import { generateRandomId } from "../orders/helperFunctions/generateRandomId";
-import { getStatisticsBySingleProduct } from "../orders/helperFunctions/getStatisticsBySingleProduct";
-import { Order } from "../orders";
 
 const ProductsContext = createContext<ProductsContextProviderTypes>(
   {} as ProductsContextProviderTypes
@@ -55,6 +53,7 @@ export const ProductsContextProvider: FC<ProductsContextProviderProps> = ({
       setIsWrongDateOrder(false);
       prepareDate();
     }
+    // eslint-disable-next-line
   }, [dateState]);
 
   const handleAddProduct = async (product: Omit<Product, "id" | "fid">) => {
@@ -72,6 +71,7 @@ export const ProductsContextProvider: FC<ProductsContextProviderProps> = ({
 
   const handleEditProduct = async (product: Product) => {
     const updateProduct = doc(db, "products", product.fid);
+    // eslint-disable-next-line
     const { fid, ...pushedProduct } = product;
     await updateDoc(updateProduct, { ...pushedProduct });
   };
@@ -115,6 +115,7 @@ export const ProductsContextProvider: FC<ProductsContextProviderProps> = ({
   );
 };
 
+// eslint-disable-next-line
 export const useProductsContext = () => {
   return useContext(ProductsContext);
 };

@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import { Route, Routes } from "react-router-dom";
 import { PageNotFound } from "../pages/pageNotFound";
 import { PRIVATE_ROUTES, PUBLIC_ROUTES } from "./list";

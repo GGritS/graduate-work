@@ -1,11 +1,4 @@
-import {
-  createContext,
-  FC,
-  SyntheticEvent,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, FC, useContext, useEffect, useState } from "react";
 import {
   AuthContextProviderProps,
   AuthContextProviderTypes,
@@ -14,7 +7,6 @@ import {
 import {
   onAuthStateChanged,
   User,
-  createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
@@ -33,6 +25,7 @@ export const AuthContextProvider: FC<AuthContextProviderProps> = ({
   const [isUserLogined, setIsUserLogined] = useState<boolean>(false);
   const [isDataFetched, setIsDataFetching] = useState<boolean>(false);
 
+  // eslint-disable-next-line
   const [loginError, setError] = useState<any>();
 
   const handleLogin = async (userLoginData: UserLoginFields) => {
@@ -43,6 +36,7 @@ export const AuthContextProvider: FC<AuthContextProviderProps> = ({
         userLoginData.password
       );
       navigate("/");
+      // eslint-disable-next-line
     } catch (error: any) {
       error.message && setError(error.message);
       console.log(error.message);
@@ -85,6 +79,7 @@ export const AuthContextProvider: FC<AuthContextProviderProps> = ({
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
+// eslint-disable-next-line
 export const useAuthContext = () => {
   return useContext(AuthContext);
 };

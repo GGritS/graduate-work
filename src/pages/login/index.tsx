@@ -10,7 +10,7 @@ import { validationSchema } from "./validationSchema";
 
 export const Login: FC = () => {
   const [isPasswordShowed, setIsPasswordShowed] = useState<boolean>(false);
-  const { handleLogin, loginError } = useAuthContext();
+  const { handleLogin } = useAuthContext();
 
   const formik = useFormik({
     initialValues: {

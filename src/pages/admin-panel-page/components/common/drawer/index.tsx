@@ -1,4 +1,4 @@
-import { Box, IconButton, Drawer as MuiDrawer } from "@mui/material";
+import { Box, Drawer as MuiDrawer } from "@mui/material";
 import { NavBar } from "../../nav-bar";
 import { FC } from "react";
 

@@ -5,7 +5,7 @@ import {
   GridRowsProp,
   GridToolbar,
 } from "@mui/x-data-grid";
-import { FC, useEffect, useMemo, useState } from "react";
+import { FC, useMemo, useState } from "react";
 import { useOrdersContext } from "../../../../context/orders/OrdersContext";
 import { CustomerOrder, Order } from "../../../../context/orders";
 
@@ -69,7 +69,7 @@ const OpenModalButton: FC<UserOrder> = ({ data }) => {
         };
       }),
     };
-  }, []);
+  }, [data]);
 
   return (
     <>
@@ -91,7 +91,7 @@ const OpenModalButton: FC<UserOrder> = ({ data }) => {
 
 export const DataGridOuter: FC = () => {
   const { orders } = useOrdersContext();
-  const [rerender, setRerender] = useState(false);
+  // const [rerender, setRerender] = useState(false);
 
   const convertTotDate = (seconds: number | undefined) => {
     if (!seconds) return "Error date";
@@ -157,7 +157,7 @@ export const DataGridOuter: FC = () => {
         };
       }),
     };
-  }, []);
+  }, [orders]);
 
   return (
     <>

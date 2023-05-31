@@ -24,7 +24,7 @@ export const ReportCards: FC = () => {
         preparedDate.end
       );
     setOrdersValues({ totalOrders, totalPriceByAllOrders });
-  }, [preparedDate]);
+  }, [preparedDate, orders]);
 
   const amountOfDays = useCalculateDifferenceInDays(
     preparedDate.start,

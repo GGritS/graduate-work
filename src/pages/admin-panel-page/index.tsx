@@ -1,4 +1,4 @@
-import { Box, useTheme } from "@mui/material";
+import { Box } from "@mui/material";
 import { FC, ReactNode } from "react";
 import { NavBar } from "./components/nav-bar";
 import { AppBarComponent } from "./components/common/app-bar";

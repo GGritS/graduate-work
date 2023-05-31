@@ -60,7 +60,7 @@ const Slider = ({ children }: Props) => {
         className="inner"
         style={{ transform: `translateX(-${activeIndex * 100}%)` }}
       >
-        {React.Children.map(children, (child: any, index) => {
+        {React.Children.map(children, (child: any) => {
           if (child) {
             return React.cloneElement(child, { width: "100%" });
           }
@@ -75,7 +75,8 @@ const Slider = ({ children }: Props) => {
         >
           <NavigateBeforeIcon />
         </button>
-        {React.Children.map(children, (child, index) => {
+
+        {React.Children.map(children, (_, index) => {
           return (
             <button
               className={`${
