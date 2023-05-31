@@ -21,11 +21,16 @@ export const ReportCircle: FC<ReportCircleProps> = ({ percent }) => {
           cy={38}
           r={36}
           className={`${style.circle} ${style.circleFill}`}
-          style={{ strokeDashoffset: 226.6 - (226.6 * percent) / 100 }}
+          style={{
+            strokeDashoffset:
+              226.6 -
+              (226.6 * (isNaN(percent) ? 1 : percent === -1 ? 100 : percent)) /
+                100,
+          }}
         ></circle>
       </svg>
       <div className={style.number}>
-        <p>{percent}%</p>
+        <p>{isNaN(percent) ? "__" : percent === -1 ? "100+" : percent}%</p>
       </div>
     </div>
   );
