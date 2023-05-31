@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, ReactNode, useState } from "react";
 import { useStyles } from "./style";
 import { Box, IconButton, TextField, Typography } from "@mui/material";
 import { ReportCircle } from "../report-circle";
@@ -8,10 +8,10 @@ import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
 type ReportCardProps = {
   value: number;
   title: string;
-  icon: JSX.Element;
+  children: ReactNode;
 };
 
-export const ReportCard: FC<ReportCardProps> = ({ value, title, icon }) => {
+export const ReportCard: FC<ReportCardProps> = ({ value, title, children }) => {
   const style = useStyles();
   const [requiredAmount, setRequiredAmount] = useState<number>(value);
   const [inputValue, setInputValue] = useState<number>(requiredAmount);
@@ -42,11 +42,24 @@ export const ReportCard: FC<ReportCardProps> = ({ value, title, icon }) => {
       <Box
         sx={{
           display: "flex",
-          justifyContent: "space-between",
           flexDirection: "column",
+          gap: "10px",
         }}
       >
-        {icon}
+        <Box
+          sx={{
+            width: "fit-content",
+            padding: "8px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            borderRadius: "50%",
+            color: "#fff",
+            backgroundColor: "#7380ec",
+          }}
+        >
+          {children}
+        </Box>
         <Typography>{title}</Typography>
         <Box>
           <Typography sx={{ display: "flex", alignItems: "center" }}>

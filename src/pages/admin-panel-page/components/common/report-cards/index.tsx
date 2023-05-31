@@ -46,15 +46,17 @@ export const ReportCards: FC = () => {
           amountOfDays === -1 ? "___ " : amountOfDays
         }д.`}
         value={ordersValues.totalOrders}
-        icon={<AutoGraphIcon fontSize="medium" />}
-      />
+      >
+        <AutoGraphIcon fontSize="medium" />
+      </ReportCard>
       <ReportCard
         title={`Отримано коштів (грн.) за ${
           amountOfDays === -1 ? "___ " : amountOfDays
         }д.`}
         value={ordersValues.totalPriceByAllOrders}
-        icon={<PriceCheckIcon fontSize="medium" />}
-      />
+      >
+        <PriceCheckIcon fontSize="medium" />
+      </ReportCard>
     </Box>
   );
 };
