@@ -1,5 +1,7 @@
 import { createContext, FC, useContext, useEffect, useState } from "react";
 import {
+  DateSate,
+  PreparedDateSate,
   Product,
   ProductsContextProviderProps,
   ProductsContextProviderTypes,
@@ -14,6 +16,8 @@ import {
 } from "firebase/firestore";
 import { db } from "../../firebase";
 import { generateRandomId } from "../orders/helperFunctions/generateRandomId";
+import { getStatisticsBySingleProduct } from "../orders/helperFunctions/getStatisticsBySingleProduct";
+import { Order } from "../orders";
 
 const ProductsContext = createContext<ProductsContextProviderTypes>(
   {} as ProductsContextProviderTypes
@@ -23,6 +27,35 @@ export const ProductsContextProvider: FC<ProductsContextProviderProps> = ({
   children,
 }) => {
   const [products, setProducts] = useState<Product[]>([]);
+  const [dateState, setDateState] = useState<DateSate>({
+    end: null,
+    start: null,
+  });
+  const [preparedDate, setPreparedDate] = useState<PreparedDateSate>({
+    end: null,
+    start: null,
+  });
+  const [isWrongDateOrder, setIsWrongDateOrder] = useState<boolean>(false);
+
+  const handleDateStateChange = (date: Date | null, params: string) => {
+    setDateState({ ...dateState, [params]: date });
+  };
+  const prepareDate = () => {
+    if (!!dateState.end && !!dateState.start) {
+      const preparedStartDate = dateState.start.toLocaleDateString();
+      const preparedEndDate = dateState.end.toLocaleDateString();
+      setPreparedDate({ end: preparedEndDate, start: preparedStartDate });
+    } else return;
+  };
+
+  useEffect(() => {
+    if (dateState.start && dateState.end && dateState.end < dateState.start) {
+      setIsWrongDateOrder(true);
+    } else {
+      setIsWrongDateOrder(false);
+      prepareDate();
+    }
+  }, [dateState]);
 
   const handleAddProduct = async (product: Omit<Product, "id" | "fid">) => {
     const id = products.length + 1;
@@ -70,6 +103,10 @@ export const ProductsContextProvider: FC<ProductsContextProviderProps> = ({
     handleAddProduct,
     handleEditProduct,
     handleRemoveProduct,
+    handleDateStateChange,
+    dateState,
+    isWrongDateOrder,
+    preparedDate,
   };
   return (
     <ProductsContext.Provider value={value}>

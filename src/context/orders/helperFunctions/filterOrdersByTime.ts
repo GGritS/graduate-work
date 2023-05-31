@@ -1,4 +1,4 @@
-import { parse, isWithinInterval,  } from "date-fns";
+import { parse, isWithinInterval, startOfDay, endOfDay } from "date-fns";
 import { Order } from "..";
 
 export function filterOrdersByTime(
@@ -6,8 +6,8 @@ export function filterOrdersByTime(
   startDate: string,
   endDate: string
 ): Order[] {
-  const start = parse(startDate, "dd/MM/yyyy", new Date());
-  const end = parse(endDate, "dd/MM/yyyy", new Date());
+  const start = startOfDay(parse(startDate, "dd/MM/yyyy", new Date()));
+  const end = endOfDay(parse(endDate, "dd/MM/yyyy", new Date()));
 
   return orders.filter((order) => {
     const orderTimestamp = new Date(order.orderTime.seconds * 1000);

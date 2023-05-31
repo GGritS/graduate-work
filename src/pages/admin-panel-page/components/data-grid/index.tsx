@@ -26,7 +26,6 @@ type InnerRow = Omit<CustomerOrder, "price" | "quantity"> & {
 
 const OpenModalButton: FC<UserOrder> = ({ data }) => {
   const [open, setOpen] = useState(false);
-  // console.log(data);
 
   const { columns, rows } = useMemo<{
     rows: GridRowsProp<InnerRow>;
