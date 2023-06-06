@@ -13,7 +13,6 @@ import {
   Timestamp,
 } from "firebase/firestore";
 import { generateRandomId } from "./helperFunctions/generateRandomId";
-// import { showTodayOrders } from "./helperFunctions/showTodayOrders";
 
 const OrdersContext = createContext<OrdersContextProviderTypes>(
   {} as OrdersContextProviderTypes
@@ -23,15 +22,6 @@ export const OrdersContextProvider: FC<OrderContextProviderProps> = ({
   children,
 }) => {
   const [orders, setOrders] = useState<Order[]>([]);
-  // const [todayOrders, setTodayOrders] = useState<Order[]>([]);
-
-  // useEffect(() => {
-  //   const fetchTodayOrders = async () => {
-  //     const updatedOrders = await showTodayOrders(orders);
-  //     setTodayOrders(updatedOrders);
-  //   };
-  //   fetchTodayOrders();
-  // }, [orders]);
 
   const handleAddOrder = async (order: Omit<Order, "orderTime">) => {
     const currentTime = await Timestamp.now();

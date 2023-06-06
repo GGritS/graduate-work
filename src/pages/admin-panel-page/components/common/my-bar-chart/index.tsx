@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { FC, useEffect, useRef, useState } from "react";
 import {
   Bar,
@@ -15,16 +15,23 @@ import { useProductsContext } from "../../../../../context/products/ProductsCont
 import { Product } from "../../../../../context/products";
 
 type MyBarChartProps = {
-  product: Product;
+  productId: string;
 };
 
-export const MyBarChart: FC<MyBarChartProps> = ({ product }) => {
+export const MyBarChart: FC<MyBarChartProps> = ({ productId }) => {
+  const { products } = useProductsContext();
+  const [product, setProduct] = useState<Product>({} as Product);
   const { name, id } = product;
   const divRef = useRef<HTMLDivElement>(null);
   // eslint-disable-next-line
   const [data, setData] = useState<any>();
   const { orders } = useOrdersContext();
   const { preparedDate } = useProductsContext();
+
+  useEffect(() => {
+    const id = products.findIndex((product) => product.id === +productId);
+    setProduct(products[id]);
+  }, [productId, products]);
 
   useEffect(() => {
     const newData = getStatisticsBySingleProduct(
@@ -47,11 +54,9 @@ export const MyBarChart: FC<MyBarChartProps> = ({ product }) => {
   }, [currentWidth]);
   return (
     <Box>
-      <Typography sx={{ display: "flex" }}>
-        <Box fontSize="18px" fontWeight={800}>
-          {name}
-        </Box>
-      </Typography>
+      <Box fontSize="18px" fontWeight={800}>
+        {name}
+      </Box>
       <div ref={divRef}>
         <BarChart width={currentWidth} height={250} data={data}>
           <CartesianGrid strokeDasharray="3 3" />

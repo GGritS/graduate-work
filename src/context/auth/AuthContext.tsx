@@ -46,10 +46,12 @@ export const AuthContextProvider: FC<AuthContextProviderProps> = ({
       }, 3000);
     }
   };
-
+  
   const handleLogOut = () => {
     signOut(auth);
   };
+
+
   useEffect(() => {
     setIsDataFetching(false);
     const unlisten = onAuthStateChanged(auth, (authUser) => {

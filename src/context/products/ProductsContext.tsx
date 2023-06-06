@@ -75,11 +75,12 @@ export const ProductsContextProvider: FC<ProductsContextProviderProps> = ({
     const { fid, ...pushedProduct } = product;
     await updateDoc(updateProduct, { ...pushedProduct });
   };
+  
   const handleRemoveProduct = async (fid: string) => {
     const docRef = doc(db, "products", fid);
 
     deleteDoc(docRef).catch((error) => {
-      console.error("Ошибка при удалении документа:", error);
+      console.error("Помилка при видаленні продукту:", error);
     });
   };
 
