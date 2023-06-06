@@ -19,7 +19,7 @@ export default function Header() {
             component={Link}
             to="/login"
           >
-            Login
+            Авторизуватись
           </Button>
         </Toolbar>
       </AppBar>
