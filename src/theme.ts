@@ -1,7 +1,5 @@
 import { createTheme } from "@mui/material/styles";
 
-// const breakpoints = createBreakpoints({});
-
 declare module "@mui/material/styles" {
   interface Palette {
     customBackground: Palette["primary"];

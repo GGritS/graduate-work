@@ -22,7 +22,7 @@ const NAV_BAR_ITEMS = [
     path: "",
   },
   {
-    title: "Таблиця",
+    title: "Замовлення",
     Icon: <BackupTableIcon fontSize="medium" />,
     path: "table",
   },
